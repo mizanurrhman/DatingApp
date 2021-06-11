@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Practise\\angular\\DatingApp\\API\\API.csproj": {}
+    "D:\\Practise\\angular\\DatingApp\\api\\API.csproj": {}
   },
   "projects": {
-    "D:\\Practise\\angular\\DatingApp\\API\\API.csproj": {
+    "D:\\Practise\\angular\\DatingApp\\api\\API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Practise\\angular\\DatingApp\\API\\API.csproj",
+        "projectUniqueName": "D:\\Practise\\angular\\DatingApp\\api\\API.csproj",
         "projectName": "API",
-        "projectPath": "D:\\Practise\\angular\\DatingApp\\API\\API.csproj",
+        "projectPath": "D:\\Practise\\angular\\DatingApp\\api\\API.csproj",
         "packagesPath": "C:\\Users\\mizanur\\.nuget\\packages\\",
-        "outputPath": "D:\\Practise\\angular\\DatingApp\\API\\obj\\",
+        "outputPath": "D:\\Practise\\angular\\DatingApp\\api\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
