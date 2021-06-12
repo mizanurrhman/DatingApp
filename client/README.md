@@ -1,9 +1,9 @@
 
-# Angular
+# Angular - Building a walking walking skeleton
 
 > Goals
 
-Complete walking skeleton and have an introductory understandingof :
+Complete walking skeleton and have an introductory understanding of :
 1. Using Angular CLI
 2. How to create a new angular app
 3. The Angular Project file

@@ -3,14 +3,18 @@ using System.Linq;
 using System.Threading.Tasks;
 using API.Data;
 using API.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class UsersController : ControllerBase
+    // [ApiController]
+    // [Route("api/[controller]")]
+
+    //no need above two lines when inherit BaseApiControler
+
+    public class UsersController : BaseApiController//ControllerBase
     {
         public DataContext _context { get; }
         public UsersController(DataContext context)
@@ -19,6 +23,7 @@ namespace API.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         // public ActionResult <IEnumerable<AppUser>> GetUsers()
         // {
         //     var users=_context.Users.ToList();

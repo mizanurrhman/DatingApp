@@ -1,106 +1,44 @@
 
-# Creating an Web Api Project using Command Line
+# Angular with DotNet Core SQlite
 
-> Learning Goals
+# Authentication Basics
+### Implement Basic Authentication in our app and have a basic understanding of:
 
-1. Using the .Net CLI
-2. API Controller and endpoints
-3. Entity Framework
-4. The API Project structure
-5. Configuring and Environment variables
-6. Source Control
+1. How to store password in the Database
+2. Using Inheritance in C# - DRY
+3. Using C# Debugger
+4. Using Data Transfer Objects (DTOs)
+5. Validation
+6. JSON Web Tokens (JWTs)
+7. Using Service in C#
+8. Middleware
+9. Extension Method - DRY
 
-> Let's Start
-* Show all commands `dotnet -h `   list of template `dotnet new -h`
-* Create a solution file `dotnet new sln` Create a folder `dotnet new webapi -o API`
-* Add the API project to solution file `dotnet sln add API`
-* Open project to vscode `code .`
+**To do** : Users should able to login register view other users and privately message to other user
 
-> Extensions
-* Install C# * Extension By Microsoft
-* Install C# * Extension By JosKreativ
-* Enable Auto Save from Edit menu
-* File > Preference > Settings ctrl+, change font size or other thing .......
-* Ctrl +, type exclude then type **/bin *Add Patern* it will Exclude bin folder from project
+* add 2 additional column PasswordHash & PasswordSalt to AppUser at API project
+`dotnet ef migrations add userPasswordAdded`
+`dotnet ef  database update`  ctrl shift P select sqlite db file
+* Create a new controller `BaseApiController`
+* For debug CSP > debug> select debug & run > select .NET Core Attach beside run button
+* drop db and update `dotnet ef database drop` y `dotnet ef database update `
 
-* Cd API then run `dotnet dev-certs https --trust` to trust https
+> JWT Tokens
+1. sends username + password to server
+2. server validate credential and return a JWT to client
+3. client send JWT with further request
+4. server verifies JWT and send back response
 
-* Add Extension **NuGet Gallery**  pcislo,   `ctrl Shift P` search nuget gallery
+> JWT Advantage
+* No session to manage -JWTs are self contained tokens
+* Portable- A single token can be used with multiple backends
+* No Cookies required - mobile friendly
+* Performance - Once a token is issued, there is no need to make a database to verify a users authentication
 
-* Instal MicroSoftEntityFrameworkCore.SQlite
+* create a ItokennService.cs under interfaces folder and another is TokenService.cs under Services folder then add scopped it to startup file , now add `System.IdentityModel.Tokens.Jwt` from nuget gallery
 
-> DbContext
+* add `"TokenKey":"super secret unguessable key",` TokenKey  (TokenService) to appsetting.Developement.json
 
-* create another new folder Data to add DbContext  create a options constructor ,add services.AddDbContext() at startup.cs
-* try to instal dotnet-ef from nuget.org ` dotnet tool install --global dotnet-ef --version 6.0.0-preview.4.21253.1`
-* try `dotnet ef migrations add initialCreate -o Data/Migrations` it will show an error ! so copy `Microsoft.EntityFrameworkCore.Design`
-  then ctrl shift p > go to Nuget Gallery ... paste last command then install from here . again run first command ef then it should be success then `dotnet ef database update`
-
-> SQLite
-* install Sqlite alexcvzz , ctrl shift p > type sqlite > chose a database > select database > then it will apper in app folder and inside sqlite explorer it will show database
-
-> Controller
-* add controller UserController and must add `[ApiController]` and `[Route("api/[controller]")]`
-
-> Git
-* Open another powershell inside solution check ` git status ` if not found any git initialized `git init`
-
-```ps
-git remote add origin [url]
-git add (all other files)
-git commit -m 'reinitialized files'
-git push origin master --force
-```
-
-
-
-# Staring  Angular
-
-> Goals
-
-Complete walking skeleton and have an introductory understandingof :
-1. Using Angular CLI
-2. How to create a new angular app
-3. The Angular Project file
-4. Angular bootstrap process
-5. Using the Angular HTTP Client Service
-6. Running An Angular app over HTTPS
-7. How to add packages using NPM
-8. add ssl certificate
-
-```ps
-
-node --version in DatingApp
-npm --version
-npm install -g @angular/cli
-ng new client  rm -rf node_modules && npm install *creating angular app named client* select y and then css
---if missing node_modules npm install typescript --save-dev
-cd client
-ng serve
-```
-> Extensions
-* Angular Language Service By Angular
-* Angular Snippets By Jhon Papa
-* Bracket Pair Colorizer 2 Coenradds
-*
-
-> Shift Alt F to format .ts file in vscode
-
->  Allow COR's Policy
-```cs
-  services.AddCors();
-  app.UseCors(policy=>policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:4200/")); *[before authorization]
-```
-now see the the result in Network tab
-
-> Bootstrap (ng)
-Run it to client `ng add ngx-bootstrap`
-add style in  angular.json `"node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",`
-
-* Font AweSome : `npm install font-awesome`
-* add ssl cert with key
-
-
-
-
-
+* add ` [AllowAnonymous]` at `userController.cs` beside `[HttpGet]`
+* add `Microsoft.AspNetCore.Authentication.JwtBearer by Microsoft` from Nuget Gallery then add service in `startup.cs`
+* add Extension `IdentityServiceExtensions & ApplicationServiceExtensions`
